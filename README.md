@@ -25,65 +25,44 @@ Then just add `import Stepper from 'react-stepper-classic';` into your file.
 
 <img src="https://raw.githubusercontent.com/mu29/react-stepper/master/example/example.png" width="600" />
 
-## Usage
+## Example Usage
 
 ```
-import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
 import Stepper from 'react-stepper-classic';
 
+const steps = [
+  { title: 'Step 1', href: '#', onClick: () => console.log('Step 1 clicked') },
+  { title: 'Step 2', href: '#', onClick: () => console.log('Step 2 clicked') },
+  { title: 'Step 3', href: '#', onClick: () => console.log('Step 3 clicked') },
+];
+
 const App = () => {
-  const [currentStep, setCurrentStep] = useState(0);
-  const steps = [
-    { title: 'Step One', onClick: () => console.log('Step One Clicked') },
-    { title: 'Step Two', onClick: () => console.log('Step Two Clicked') },
-    { title: 'Step Three', onClick: () => console.log('Step Three Clicked') },
-    { title: 'Step Four', onClick: () => console.log('Step Four Clicked') },
-  ];
-
-  const handleNext = () => {
-    setCurrentStep((prevStep) => Math.min(prevStep + 1, steps.length - 1));
-  };
-
   return (
-    <div>
-      <Stepper
-        steps={steps}
-        activeStep={currentStep}
-        disabledSteps={[2]}
-        activeColor="#4caf50"
-        completeColor="#4caf50"
-        defaultColor="#e0e0e0"
-        circleFontColor="#fff"
-        activeTitleColor="#000"
-        completeTitleColor="#000"
-        defaultTitleColor="#757575"
-        size={32}
-        circleFontSize={16}
-        titleFontSize={16}
-        circleTop={24}
-        titleTop={64}
-        defaultOpacity="0.5"
-        completeOpacity="1"
-        activeOpacity="1"
-        barStyle="solid"
-        defaultBorderColor="#e0e0e0"
-        completeBorderColor="#4caf50"
-        activeBorderColor="#4caf50"
-        defaultBorderStyle="solid"
-        completeBorderStyle="solid"
-        activeBorderStyle="solid"
-        defaultBarColor="#e0e0e0"
-        completeBarColor="#4caf50"
-        lineMarginOffset={4}
-        defaultBorderWidth={1}
-      />
-      <button onClick={handleNext}>Next</button>
-    </div>
+    <Stepper
+      activeStep={1}
+      steps={steps}
+    />
   );
 };
 
-ReactDOM.render(<App />, document.getElementById('root'));
+```
+
+## Custom Styles Example
+
+```
+const customStepStyles = {
+  step: { backgroundColor: 'lightblue' },
+  circle: { borderColor: 'blue' },
+  title: { color: 'darkblue' },
+};
+
+const steps = [
+  { title: 'Step 1', customStyles: customStepStyles },
+  { title: 'Step 2' },
+  { title: 'Step 3' },
+];
+
+<Stepper steps={steps} customStyles={{ stepper: { backgroundColor: 'lightgray' } }} />
 
 
 ```
@@ -92,41 +71,68 @@ See full example [here](https://github.com/sadequlfakir/react-stepper-classic/bl
 
 ## API
 
-### Main Component
+### Props
 
-| name                 | description                                    | default | type   |
-| -------------------- | ---------------------------------------------- | ------- | ------ |
-| activeStep           | Active step index, starts at 0                 | 0       | number |
-| steps                | List of step objects (see below)               |         | array  |
-| activeColor          | Active circle color                            | #5096FF | string |
-| completeColor        | Completed circle color                         | #5096FF | string |
-| defaultColor         | Default circle color - not active or completed | #E0E0E0 | string |
-| activeTitleColor     | Active title color                             | #000    | string |
-| completeTitleColor   | Completed title color                          | #000    | string |
-| defaultTitleColor    | Default title color - not active or completed  | #757575 | string |
-| circleFontColor      | Circle text color (for index)                  | #FFF    | string |
-| size                 | Circle size                                    | 32      | number |
-| circleFontSize       | Circle text size                               | 16      | number |
-| titleFontSize        | Title text size                                | 16      | number |
-| circleTop            | Top margin of `Stepper` component              | 24      | number |
-| titleTop             | Space between circle and title                 | 8       | number |
-| defaultOpacity       | Default circle opacity                         | 1       | string |
-| completeOpacity      | Completed circle opacity                       | 1       | string |
-| activeOpacity        | Active circle opacity                          | 1       | string |
-| defaultTitleOpacity  | Default title opacity                          | 1       | string |
-| completeTitleOpacity | Completed title opacity                        | 1       | string |
-| activeTitleOpacity   | Active title opacity                           | 1       | string |
-| barStyle             | Style of bar separating steps                  | solid   | string |
-| defaultBorderColor   | Default color of border surrounding circle     |         | string |
-| completeBorderColor  | Color of border surrounding completed circle   |         | string |
-| activeBorderColor    | Color of border surrounding active circle      |         | string |
-| defaultBorderStyle   | Default style of border surrounding circle     | solid   | string |
-| completeBorderStyle  | Style of border surrounding completed circle   | solid   | string |
-| activeBorderStyle    | Style of border surrounding active circle      | solid   | string |
-| defaultBarColor      | Default color of bar separating circles        | #E0E0E0 | string |
-| completeBarColor     | Color of bar connected to a completed step     | #E0E0E0 | string |
-| lineMarginOffset     | Offset for line margin                         | 4       | number |
-| defaultBorderWidth   | Default Border Width                           | 3       | number |
+| Prop Name              | Type   | Default Value | Description                                                              |
+| ---------------------- | ------ | ------------- | ------------------------------------------------------------------------ |
+| `width`                | number |               | The width of the step as a percentage of the total width of the stepper. |
+| `activeColor`          | string | `'#5096FF'`   | The background color of the active step.                                 |
+| `completeColor`        | string | `'#5096FF'`   | The background color of the completed steps.                             |
+| `defaultColor`         | string | `'#E0E0E0'`   | The background color of the inactive steps.                              |
+| `activeTitleColor`     | string | `'#000'`      | The text color of the active step title.                                 |
+| `completeTitleColor`   | string | `'#000'`      | The text color of the completed step titles.                             |
+| `defaultTitleColor`    | string | `'#757575'`   | The text color of the inactive step titles.                              |
+| `circleFontColor`      | string | `'#FFF'`      | The font color of the step index or icon.                                |
+| `size`                 | number | `32`          | The size of the step circle.                                             |
+| `circleFontSize`       | number | `16`          | The font size of the step index or icon.                                 |
+| `titleFontSize`        | number | `16`          | The font size of the step title.                                         |
+| `circleTop`            | number | `24`          | The top margin for the step circle.                                      |
+| `titleTop`             | number | `8`           | The top margin for the step title.                                       |
+| `title`                | string |               | The title of the step.                                                   |
+| `index`                | number |               | The index of the step.                                                   |
+| `active`               | bool   | `false`       | Indicates if the step is active.                                         |
+| `completed`            | bool   | `false`       | Indicates if the step is completed.                                      |
+| `first`                | bool   | `false`       | Indicates if the step is the first step.                                 |
+| `isLast`               | bool   | `false`       | Indicates if the step is the last step.                                  |
+| `completeOpacity`      | string |               | The opacity of the completed step.                                       |
+| `activeOpacity`        | string |               | The opacity of the active step.                                          |
+| `defaultOpacity`       | string |               | The opacity of the inactive step.                                        |
+| `completeTitleOpacity` | string |               | The opacity of the completed step title.                                 |
+| `activeTitleOpacity`   | string |               | The opacity of the active step title.                                    |
+| `defaultTitleOpacity`  | string |               | The opacity of the inactive step title.                                  |
+| `barStyle`             | string | `'solid'`     | The style of the connecting bar.                                         |
+| `defaultBarColor`      | string | `'#E0E0E0'`   | The color of the inactive connecting bar.                                |
+| `completeBarColor`     | string |               | The color of the completed connecting bar.                               |
+| `defaultBorderColor`   | string |               | The border color of the inactive step circle.                            |
+| `completeBorderColor`  | string |               | The border color of the completed step circle.                           |
+| `activeBorderColor`    | string |               | The border color of the active step circle.                              |
+| `defaultBorderStyle`   | string | `'solid'`     | The border style of the inactive step circle.                            |
+| `completeBorderStyle`  | string |               | The border style of the completed step circle.                           |
+| `activeBorderStyle`    | string |               | The border style of the active step circle.                              |
+| `lineMarginOffset`     | number | `4`           | The margin offset for the connecting lines.                              |
+| `defaultBorderWidth`   | number | `3`           | The border width of the step circle.                                     |
+| `href`                 | string |               | The URL to navigate to when the step is clicked.                         |
+| `onClick`              | func   |               | The function to call when the step is clicked.                           |
+| `customStyles`         | object | `{}`          | Custom styles to apply to various parts of the step.                     |
+
+## Stepper Component
+
+The `Stepper` component manages and displays a series of `Step` components.
+
+### Props
+
+| Prop Name       | Type                    | Default Value | Description                                                                                                                |
+| --------------- | ----------------------- | ------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `activeStep`    | number                  | `0`           | The index of the currently active step.                                                                                    |
+| `steps`         | arrayOf                 |               | An array of step objects. Each step object should contain `title`, `icon`, `href`, `onClick`, and optional `customStyles`. |
+|                 | shape({                 |               |                                                                                                                            |
+|                 | title:                  |               |                                                                                                                            |
+|                 | icon:                   |               |                                                                                                                            |
+|                 | href:                   |               |                                                                                                                            |
+|                 | onClick:                |               |                                                                                                                            |
+|                 | customStyles: object }) |               |                                                                                                                            |
+| `disabledSteps` | arrayOf                 | `[]`          | An array of indices representing steps that are disabled.                                                                  |
+| `customStyles`  | object                  | `{}`          | Custom styles to apply to the stepper container and the stepper.                                                           |
 
 ### Step Objects
 
