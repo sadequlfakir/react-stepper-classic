@@ -1,0 +1,48 @@
+{
+  "name": "react-stepper-classic",
+  "version": "1.0.1",
+  "description": "Well-designed stepper component for react",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel src -d lib",
+    "prepublish": "npm run build",
+    "example": "webpack serve --config example/webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mu29/react-stepper-classic.git"
+  },
+  "keywords": [
+    "react-stepper-classic",
+    "react-steps",
+    "component",
+    "react-stepper",
+    "steps",
+    "stepper",
+    "step"
+  ],
+  "author": "Sadequl Islam <devsadeq.net>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mu29/react-stepper-classic/issues"
+  },
+  "homepage": "https://github.com/mu29/react-stepper-classic#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.24.7",
+    "@babel/core": "^7.24.7",
+    "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/plugin-proposal-object-rest-spread": "^7.20.7",
+    "@babel/preset-env": "^7.24.7",
+    "@babel/preset-react": "^7.24.7",
+    "webpack": "^1.13.2"
+  },
+  "engines": {
+    "node": ">= 5.11.0"
+  },
+  "dependencies": {
+    "prop-types": "^15.5.10",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2"
+  }
+}
